@@ -11,6 +11,7 @@ import {
   getSingleUser,
   updateUser,
 } from "./user.controller"
+import auth from "../../middlewares/auth"
 
 const router = Router()
 
@@ -19,13 +20,14 @@ router.post(
   validateRequest(createUserValidationSchema),
   createUser
 )
-router.get("/users", getAllUsers)
-router.get("/users/:userId", getSingleUser)
+router.get("/", auth("admin"), getAllUsers)
+router.get("/:userId", auth("admin"), getSingleUser)
 router.patch(
-  "/users/update-user/:userId",
+  "/update-user/:userId",
+  auth("customer"),
   validateRequest(updateUserValidationSchema),
   updateUser
 )
-router.delete("/users/delete-user/:userId", deleteUser)
+router.delete("/delete-user/:userId", auth("customer", "admin"), deleteUser)
 
 export const UserRoutes = router
