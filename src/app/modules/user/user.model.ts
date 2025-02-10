@@ -42,10 +42,13 @@ userSchema.pre("save", async function (next) {
   next()
 })
 
-userSchema.post("save", function (doc, next) {
-  doc.password = ""
-  next()
-})
+userSchema.post(
+  ["save", "findOneAndUpdate", "findOneAndDelete"],
+  function (doc, next) {
+    doc.password = ""
+    next()
+  }
+)
 
 userSchema.statics.isPasswordMatched = async function (
   textedPassword,
