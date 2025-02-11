@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { bicycleCategories } from "./bicycle.constant"
 
 export const createBicycleValidationSchema = z.object({
   body: z.object({
@@ -7,7 +8,9 @@ export const createBicycleValidationSchema = z.object({
     price: z
       .number({ required_error: "Price is required" })
       .positive({ message: "Price must be positive number" }),
-    category: z.string({ required_error: "Category is required" }),
+    category: z.enum([...bicycleCategories] as [string, ...string[]], {
+      required_error: "Select a category",
+    }),
     description: z.string({ required_error: "Description is required" }),
     quantity: z
       .number({ required_error: "Quantity is required" })
@@ -23,7 +26,11 @@ export const updateBicycleValidationSchema = z.object({
       .number({ required_error: "Price is required" })
       .positive({ message: "Price must be positive number" })
       .optional(),
-    category: z.string({ required_error: "Category is required" }).optional(),
+    category: z
+      .enum([...bicycleCategories] as [string, ...string[]], {
+        required_error: "Select a category",
+      })
+      .optional(),
     description: z
       .string({ required_error: "Description is required" })
       .optional(),

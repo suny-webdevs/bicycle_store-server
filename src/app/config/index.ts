@@ -10,4 +10,7 @@ export default {
   saltRound: process.env.SALT_ROUND,
   jwtAccessSecret: process.env.JWT_ACCESS_SECRET,
   jwtAccessExpiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
+  cloudName: process.env.CLOUD_NAME,
+  cloudKey: process.env.CLOUD_KEY,
+  cloudSecret: process.env.CLOUD_SECRET,
 }

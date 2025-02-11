@@ -7,9 +7,12 @@ export const createUserValidationSchema = z.object({
       .string({ required_error: "Email is required" })
       .trim()
       .toLowerCase()
-      .regex(new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"), {
-        message: "Invalid email address",
-      }),
+      .email()
+      .refine(
+        (value) =>
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/.test(value),
+        { message: "Invalid user email" }
+      ),
     phone: z
       .string({ required_error: "Phone is required" })
       .min(11, { message: "Phone must be 11 characters" }),
@@ -28,13 +31,21 @@ export const updateUserValidationSchema = z.object({
       .string()
       .trim()
       .toLowerCase()
-      .regex(new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"), {
-        message: "Invalid email address",
-      })
+      .email()
+      .refine(
+        (value) =>
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/.test(value),
+        { message: "Invalid user email" }
+      )
       .optional(),
-    phone: z.string().min(11).optional(),
-    password: z.string().min(6).optional(),
-    image: z.string().optional(),
+    phone: z
+      .string()
+      .min(11, { message: "Phone must be 11 characters" })
+      .optional(),
+    password: z
+      .string()
+      .min(6, { message: "Password must be 6 characters" })
+      .optional(),
     address: z.string().optional(),
   }),
 })

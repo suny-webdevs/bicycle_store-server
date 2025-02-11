@@ -4,7 +4,7 @@ import { BicycleServices } from "./bicycle.service"
 import httpStatus from "http-status"
 
 export const createBicycle = catchAsync(async (req, res) => {
-  const data = await BicycleServices.createBicycleToDB(req.body)
+  const data = await BicycleServices.createBicycleToDB(req.file, req.body)
   sendResponse(res, httpStatus.CREATED, "Product successfully created", data)
 })
 

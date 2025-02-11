@@ -11,12 +11,16 @@ import {
   updateBicycle,
 } from "./bicycle.controller"
 import auth from "../../middlewares/auth"
+import { upload } from "../../utils/sendImageToCloudinary"
+import textToJson from "../../middlewares/textToJson"
 
 const router = Router()
 
 router.post(
   "/create-bicycle",
   auth("admin"),
+  upload.single("file"),
+  textToJson(),
   validateRequest(createBicycleValidationSchema),
   createBicycle
 )

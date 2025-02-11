@@ -1,10 +1,12 @@
+import { TBicycleCategory } from "./bicycle.constant"
+
 export type TBicycle = {
+  image?: string
   name: string
   brand: string
   price: number
-  category: string
+  category: TBicycleCategory
   description: string
   quantity: number
   inStock: boolean
-  isDeleted: boolean
 }
