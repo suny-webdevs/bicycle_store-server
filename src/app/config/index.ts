@@ -13,4 +13,9 @@ export default {
   cloudName: process.env.CLOUD_NAME,
   cloudKey: process.env.CLOUD_KEY,
   cloudSecret: process.env.CLOUD_SECRET,
+  spEndpoint: process.env.SP_ENDPOINT,
+  spUsername: process.env.SP_USERNAME,
+  spPassword: process.env.SP_PASSWORD,
+  spPrefix: process.env.SP_PREFIX,
+  spReturnUrl: process.env.SP_RETURN_URL,
 }

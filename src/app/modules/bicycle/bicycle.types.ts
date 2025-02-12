@@ -1,4 +1,12 @@
-import { TBicycleCategory } from "./bicycle.constant"
+export type TBicycleCategory =
+  | "Road"
+  | "Mountain"
+  | "Electric"
+  | "Hybrid"
+  | "Cruiser"
+  | "BMX"
+  | "Folding"
+  | "Recumbent"
 
 export type TBicycle = {
   image?: string

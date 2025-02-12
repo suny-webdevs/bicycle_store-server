@@ -8,13 +8,3 @@ export const bicycleCategories = [
   "Folding",
   "Recumbent",
 ] as const
-
-export type TBicycleCategory =
-  | "Road"
-  | "Mountain"
-  | "Electric"
-  | "Hybrid"
-  | "Cruiser"
-  | "BMX"
-  | "Folding"
-  | "Recumbent"
