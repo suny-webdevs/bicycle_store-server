@@ -34,7 +34,7 @@ const auth = (...requiredRole: TUserRole[]) => {
       }
 
       req.user = decoded as JwtPayload
-
+      // req.userData = user as TUser
       next()
     }
   )

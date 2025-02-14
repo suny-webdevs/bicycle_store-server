@@ -15,7 +15,8 @@ const userSchema = new Schema<TUser, UserModel>(
     password: { type: String, required: [true, "Password is required"] },
     image: { type: String },
     role: { type: String, enum: ["admin", "customer"], default: "customer" },
-    address: { type: String, required: [true, "Address is required"] },
+    address: { type: String },
+    city: { type: String },
     isDeleted: { type: Boolean, default: false },
   },
   { timestamps: true }

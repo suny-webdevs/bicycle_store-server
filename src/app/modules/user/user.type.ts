@@ -1,14 +1,16 @@
-import { Model } from "mongoose"
+import { Model, Types } from "mongoose"
 import { USER_ROLE } from "./user.constant"
 
 export type TUser = {
+  _id: Types.ObjectId
   name: string
   email: string
   phone: string
   password: string
   image?: string
   role: "admin" | "customer"
-  address: string
+  address?: string
+  city?: string
   isDeleted: boolean
 }
 
