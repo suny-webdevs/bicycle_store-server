@@ -13,6 +13,8 @@ const userSchema = new Schema<TUser, UserModel>(
     },
     phone: { type: String, required: [true, "Phone is required"] },
     password: { type: String, required: [true, "Password is required"] },
+    changePassword: { type: Boolean, default: true },
+    passwordChangedAt: { type: Date },
     image: { type: String },
     role: { type: String, enum: ["admin", "customer"], default: "customer" },
     address: { type: String },
@@ -51,11 +53,24 @@ userSchema.post(
   }
 )
 
+userSchema.statics.isUserExistsByCustomId = async function (email: string) {
+  return await User.findOne({ email }).select("+password")
+}
+
 userSchema.statics.isPasswordMatched = async function (
   textedPassword,
   hashedPassword
 ) {
   return await bcrypt.compare(textedPassword, hashedPassword)
+}
+
+userSchema.statics.isJWTIssuedBeforePasswordChanged = function (
+  passwordChangedTimestamp: Date,
+  jwtIssuedTimestamp: number
+) {
+  const passwordChangedTime =
+    new Date(passwordChangedTimestamp).getTime() / 1000
+  return passwordChangedTime > jwtIssuedTimestamp
 }
 
 export const User = model<TUser, UserModel>("User", userSchema)

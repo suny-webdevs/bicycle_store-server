@@ -20,7 +20,7 @@ const auth = (...requiredRole: TUserRole[]) => {
         config.jwtAccessSecret as string
       ) as JwtPayload
 
-      const { email, role } = decoded
+      const { email, role, iat } = decoded
 
       // Finding user by custom id from token
       const user = await User.findOne({ email })
@@ -33,8 +33,17 @@ const auth = (...requiredRole: TUserRole[]) => {
         throw new AppError(httpStatus.UNAUTHORIZED, "UNAUTHORIZED access")
       }
 
+      if (
+        user.passwordChangedAt &&
+        User.isJWTIssuedBeforePasswordChanged(
+          user.passwordChangedAt,
+          iat as number
+        )
+      ) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized !")
+      }
+
       req.user = decoded as JwtPayload
-      // req.userData = user as TUser
       next()
     }
   )
