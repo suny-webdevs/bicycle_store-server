@@ -100,7 +100,7 @@ const refreshToken = async (token: string) => {
   // checking if the given token is valid
   const decoded = verifyToken(token, config.jwtRefreshSecret as string)
 
-  const { email, iat } = decoded
+  const { email, iat } = decoded as JwtPayload
 
   // checking if the user is exist
   const user = await User.findOne({ email })

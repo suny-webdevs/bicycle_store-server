@@ -14,9 +14,9 @@ const createBicycleToDB = async (file: any, payload: TBicycle) => {
     const imageName = (payload?.name).split(" ").join("_")
     const path = file?.path
 
-    const { secure_url } = await sendImageToCloudinary(imageName, path)
+    const sendImageResult = await sendImageToCloudinary(imageName, path)
 
-    payload.image = secure_url as string
+    payload.image = sendImageResult?.secure_url as string
   }
 
   const data = await Bicycle.create(payload)

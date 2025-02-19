@@ -30,14 +30,20 @@ const createOrderIntoDB = async (
       if (product) {
         const subtotal = product ? (product.price || 0) * item.quantity : 0
         totalPrice += subtotal
-        return item
+        return {
+          productId: item.productId,
+          quantity: item.quantity,
+        }
       }
     })
   )
-  console.log("product details", productDetails)
+
+  const filteredProductDetails = productDetails.filter(
+    (detail) => detail !== undefined
+  )
 
   orderData.customerId = userData._id
-  orderData.products = productDetails
+  orderData.products = filteredProductDetails
   orderData.totalPrice = totalPrice
   orderData.status = "Pending"
 
