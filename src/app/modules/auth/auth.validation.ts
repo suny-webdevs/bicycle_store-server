@@ -11,3 +11,9 @@ export const loginValidationSchema = z.object({
       .min(6, { message: "Password must have 6 characters" }),
   }),
 })
+
+export const refreshTokenValidationSchema = z.object({
+  cookies: z.object({
+    refreshToken: z.string({ required_error: "Refresh token is required" }),
+  }),
+})
