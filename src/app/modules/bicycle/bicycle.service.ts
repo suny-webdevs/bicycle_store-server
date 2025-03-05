@@ -1,3 +1,4 @@
+import QueryBuilder from "../../builder/QueryBuilder"
 import AppError from "../../errors/AppError"
 import { sendImageToCloudinary } from "../../utils/sendImageToCloudinary"
 import { Bicycle } from "./bicycle.model"
@@ -23,9 +24,21 @@ const createBicycleToDB = async (file: any, payload: TBicycle) => {
   return data
 }
 
-const getAllBicyclesFromDB = async () => {
-  const data = await Bicycle.find()
-  return data
+const getAllBicyclesFromDB = async (query: Record<string, unknown>) => {
+  const bicycleQuery = new QueryBuilder(Bicycle.find(), query)
+    .search(["name", "brand", "category", "inStock"])
+    .filter()
+    .sort()
+    .paginate()
+    .fields()
+
+  const data = await bicycleQuery.modelQuery
+  const meta = await bicycleQuery.countTotal()
+
+  return {
+    meta,
+    data,
+  }
 }
 
 const getSingleBicycleFromDB = async (id: string) => {
