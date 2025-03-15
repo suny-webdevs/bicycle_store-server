@@ -27,3 +27,8 @@ export const deleteUser = catchAsync(async (req, res) => {
   const data = await UserService.deleteUserFromDB(req.params.userId)
   sendResponse(res, httpStatus.OK, "User deleted successfully", data)
 })
+
+export const getUserProfile = catchAsync(async (req, res) => {
+  const data = await UserService.getUserProfileFromDB(req.user.email)
+  sendResponse(res, httpStatus.OK, "User profile get successfully", data)
+})

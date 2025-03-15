@@ -9,6 +9,7 @@ import {
   deleteUser,
   getAllUsers,
   getSingleUser,
+  getUserProfile,
   updateUser,
 } from "./user.controller"
 import auth from "../../middlewares/auth"
@@ -29,5 +30,6 @@ router.patch(
   updateUser
 )
 router.delete("/delete-user/:userId", auth("customer", "admin"), deleteUser)
+router.get("/profile", getUserProfile)
 
 export const UserRoutes = router

@@ -1,3 +1,4 @@
+import { JwtPayload } from "jsonwebtoken"
 import AppError from "../../errors/AppError"
 import { User } from "./user.model"
 import { TUser } from "./user.type"
@@ -42,10 +43,21 @@ const deleteUserFromDB = async (id: string) => {
   return data
 }
 
+const getUserProfileFromDB = async (email: string) => {
+  const isUserExist = await User.isUserExistsByEmail(email)
+  if (!isUserExist) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not found!")
+  }
+
+  const user = await User.findOne({ email })
+  return user
+}
+
 export const UserService = {
   createUserToDB,
   getAllUsersFromDB,
   getSingleUserFromDB,
   updateUserFromDB,
   deleteUserFromDB,
+  getUserProfileFromDB,
 }
