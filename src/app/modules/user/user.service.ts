@@ -43,14 +43,16 @@ const deleteUserFromDB = async (id: string) => {
   return data
 }
 
-const getUserProfileFromDB = async (email: string) => {
-  const isUserExist = await User.isUserExistsByEmail(email)
-  if (!isUserExist) {
-    throw new AppError(httpStatus.NOT_FOUND, "User not found!")
+const getUserProfileFromDB = async (email: string, role: string) => {
+  let result
+  if (role === "admin") {
+    result = await User.findOne({ email })
+  }
+  if (role === "customer") {
+    result = await User.findOne({ email })
   }
 
-  const user = await User.findOne({ email })
-  return user
+  return result
 }
 
 export const UserService = {

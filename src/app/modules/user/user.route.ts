@@ -30,6 +30,6 @@ router.patch(
   updateUser
 )
 router.delete("/delete-user/:userId", auth("customer", "admin"), deleteUser)
-router.get("/profile", getUserProfile)
+router.get("/profile", auth("admin", "customer"), getUserProfile)
 
 export const UserRoutes = router
