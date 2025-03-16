@@ -6,7 +6,7 @@ import httpStatus from "http-status"
 
 const createUserToDB = async (payload: TUser) => {
   const isExists = await User.findOne({ email: payload.email })
-  console.log(isExists)
+
   if (isExists) {
     throw new AppError(httpStatus.CONFLICT, "User already exists!")
   }

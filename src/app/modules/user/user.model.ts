@@ -5,6 +5,7 @@ import config from "../../config"
 
 const userSchema = new Schema<TUser, UserModel>(
   {
+    _id: { type: Schema.Types.ObjectId, required: true, unique: true },
     name: { type: String, required: [true, "Name is required"] },
     email: {
       type: String,
@@ -53,7 +54,7 @@ userSchema.post(
   }
 )
 
-userSchema.statics.isUserExistsByCustomId = async function (email: string) {
+userSchema.statics.isUserExistsByEmail = async function (email: string) {
   return await User.findOne({ email }).select("+password")
 }
 
