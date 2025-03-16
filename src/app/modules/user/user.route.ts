@@ -22,6 +22,7 @@ router.post(
   createUser
 )
 router.get("/", auth("admin"), getAllUsers)
+router.get("/profile", auth("admin", "customer"), getUserProfile)
 router.get("/:userId", auth("admin"), getSingleUser)
 router.patch(
   "/update-user/:userId",
@@ -30,6 +31,5 @@ router.patch(
   updateUser
 )
 router.delete("/delete-user/:userId", auth("customer", "admin"), deleteUser)
-router.get("/profile", auth("admin", "customer"), getUserProfile)
 
 export const UserRoutes = router
