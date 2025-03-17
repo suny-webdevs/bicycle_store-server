@@ -44,7 +44,7 @@ const deleteUserFromDB = async (id: string) => {
 }
 
 const getUserProfileFromDB = async (email: string, role: string) => {
-  let result
+  let result = null
   if (role === "admin") {
     result = await User.findOne({ email })
   }
