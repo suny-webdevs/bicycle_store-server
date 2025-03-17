@@ -22,7 +22,7 @@ router.post(
   createUser
 )
 router.get("/", auth("admin"), getAllUsers)
-router.get("/profile", auth("admin", "customer"), getUserProfile)
+router.get("/:email", auth("admin", "customer"), getUserProfile)
 router.get("/:userId", auth("admin"), getSingleUser)
 router.patch(
   "/update-user/:userId",

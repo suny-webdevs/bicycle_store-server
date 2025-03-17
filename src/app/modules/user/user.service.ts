@@ -43,16 +43,9 @@ const deleteUserFromDB = async (id: string) => {
   return data
 }
 
-const getUserProfileFromDB = async (email: string, role: string) => {
-  let result = null
-  if (role === "admin") {
-    result = await User.findOne({ email })
-  }
-  if (role === "customer") {
-    result = await User.findOne({ email })
-  }
-
-  return result
+const getUserProfileFromDB = async (email: string) => {
+  const data = await User.findOne({ email })
+  return data
 }
 
 export const UserService = {
