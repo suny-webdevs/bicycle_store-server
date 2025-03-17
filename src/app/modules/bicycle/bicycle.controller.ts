@@ -9,7 +9,7 @@ export const createBicycle = catchAsync(async (req, res) => {
 })
 
 export const getAllBicycles = catchAsync(async (req, res) => {
-  const data = await BicycleServices.getAllBicyclesFromDB()
+  const data = await BicycleServices.getAllBicyclesFromDB(req.query)
   sendResponse(res, httpStatus.OK, "Get all products successfully", data)
 })
 
