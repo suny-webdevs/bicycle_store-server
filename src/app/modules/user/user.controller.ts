@@ -14,11 +14,6 @@ export const getAllUsers = catchAsync(async (req, res) => {
   sendResponse(res, httpStatus.OK, "Get all users successfully", data)
 })
 
-// export const getSingleUser = catchAsync(async (req, res) => {
-//   const data = await UserService.getSingleUserFromDB(req.params.userId)
-//   sendResponse(res, httpStatus.OK, "Get user successfully", data)
-// })
-
 export const updateUser = catchAsync(async (req, res) => {
   const data = await UserService.updateUserFromDB(req.params.userId, req.body)
   sendResponse(res, httpStatus.OK, "User updated successfully", data)
@@ -30,7 +25,7 @@ export const deleteUser = catchAsync(async (req, res) => {
 })
 
 export const getUserProfile = catchAsync(async (req, res) => {
-  if (!req.user || !req.user.email) {
+  if (!req.user || !req.user.id || !req.user.email) {
     throw new AppError(httpStatus.BAD_REQUEST, "Invalid user data")
   }
   const { id, role } = req.user

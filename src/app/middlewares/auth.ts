@@ -30,10 +30,12 @@ const auth = (...requiredRole: TUserRole[]) => {
         throw new AppError(httpStatus.NOT_FOUND, "User not found")
       }
 
+      // Checking if user is deleted or not
       if (user?.isDeleted) {
         throw new AppError(httpStatus.UNAUTHORIZED, "UNAUTHORIZED access")
       }
 
+      // Check required role exists or not
       if (requiredRole && !requiredRole.includes(role)) {
         throw new AppError(httpStatus.UNAUTHORIZED, "UNAUTHORIZED access")
       }

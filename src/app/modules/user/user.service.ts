@@ -24,11 +24,6 @@ const getAllUsersFromDB = async () => {
   return data
 }
 
-// const getSingleUserFromDB = async (id: string) => {
-//   const data = await User.findById(id)
-//   return data
-// }
-
 const updateUserFromDB = async (id: string, payload: Partial<TUser>) => {
   const data = await User.findByIdAndUpdate(id, payload, { new: true })
   return data
@@ -58,7 +53,6 @@ const getUserProfileFromDB = async (id: string, role: string) => {
 export const UserService = {
   createUserToDB,
   getAllUsersFromDB,
-  // getSingleUserFromDB,
   updateUserFromDB,
   deleteUserFromDB,
   getUserProfileFromDB,

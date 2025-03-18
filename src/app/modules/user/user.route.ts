@@ -8,7 +8,6 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
-  // getSingleUser,
   getUserProfile,
   updateUser,
 } from "./user.controller"
@@ -23,7 +22,6 @@ router.post(
   createUser
 )
 router.get("/", auth("admin"), getAllUsers)
-// router.get("/:userId", auth("admin"), getSingleUser)
 router.patch(
   "/update-user/:userId",
   auth("customer"),
