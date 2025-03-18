@@ -22,14 +22,25 @@ const auth = (...requiredRole: TUserRole[]) => {
 
       const { email, role, iat } = decoded
 
+      console.log({ decoded })
+
       // Finding user by custom id from token
       const user = await User.findOne({ email })
+
+      console.log({ user })
 
       // Checking if user is not exists
       if (!user) {
         throw new AppError(httpStatus.NOT_FOUND, "User not found")
       }
-      if (user?.isDeleted || (requiredRole && !requiredRole.includes(role))) {
+
+      console.log({ requiredRole })
+
+      if (user?.isDeleted) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "UNAUTHORIZED access")
+      }
+
+      if (requiredRole && !requiredRole.includes(role)) {
         throw new AppError(httpStatus.UNAUTHORIZED, "UNAUTHORIZED access")
       }
 
@@ -40,10 +51,10 @@ const auth = (...requiredRole: TUserRole[]) => {
           iat as number
         )
       ) {
-        throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized !")
+        throw new AppError(httpStatus.UNAUTHORIZED, "UNAUTHORIZED access!")
       }
 
-      req.user = decoded as JwtPayload
+      req.user = decoded as JwtPayload & { role: string }
       next()
     }
   )

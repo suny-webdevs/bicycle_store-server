@@ -8,11 +8,12 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
-  getSingleUser,
+  // getSingleUser,
   getUserProfile,
   updateUser,
 } from "./user.controller"
 import auth from "../../middlewares/auth"
+import { USER_ROLE } from "./user.constant"
 
 const router = Router()
 
@@ -22,8 +23,7 @@ router.post(
   createUser
 )
 router.get("/", auth("admin"), getAllUsers)
-router.get("/:email", auth("admin", "customer"), getUserProfile)
-router.get("/:userId", auth("admin"), getSingleUser)
+// router.get("/:userId", auth("admin"), getSingleUser)
 router.patch(
   "/update-user/:userId",
   auth("customer"),
@@ -31,5 +31,11 @@ router.patch(
   updateUser
 )
 router.delete("/delete-user/:userId", auth("customer", "admin"), deleteUser)
+
+router.get(
+  "/profile",
+  auth(USER_ROLE.admin, USER_ROLE.customer),
+  getUserProfile
+)
 
 export const UserRoutes = router
