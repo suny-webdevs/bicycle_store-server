@@ -22,19 +22,13 @@ const auth = (...requiredRole: TUserRole[]) => {
 
       const { email, role, iat } = decoded
 
-      console.log({ decoded })
-
       // Finding user by custom id from token
       const user = await User.findOne({ email })
-
-      console.log({ user })
 
       // Checking if user is not exists
       if (!user) {
         throw new AppError(httpStatus.NOT_FOUND, "User not found")
       }
-
-      console.log({ requiredRole })
 
       if (user?.isDeleted) {
         throw new AppError(httpStatus.UNAUTHORIZED, "UNAUTHORIZED access")

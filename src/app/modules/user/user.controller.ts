@@ -33,7 +33,7 @@ export const getUserProfile = catchAsync(async (req, res) => {
   if (!req.user || !req.user.email) {
     throw new AppError(httpStatus.BAD_REQUEST, "Invalid user data")
   }
-  const { email, role } = req.user
-  const data = await UserService.getUserProfileFromDB(email, role)
+  const { id, role } = req.user
+  const data = await UserService.getUserProfileFromDB(id, role)
   sendResponse(res, httpStatus.OK, "User profile get successfully", data)
 })

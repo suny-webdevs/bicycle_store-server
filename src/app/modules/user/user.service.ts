@@ -43,13 +43,13 @@ const deleteUserFromDB = async (id: string) => {
   return data
 }
 
-const getUserProfileFromDB = async (email: string, role: string) => {
+const getUserProfileFromDB = async (id: string, role: string) => {
   let data
   if (role === "admin") {
-    data = await User.findOne({ email })
+    data = await User.findById(id)
   }
   if (role === "customer") {
-    data = await User.findOne({ email })
+    data = await User.findById(id)
   }
 
   return data
