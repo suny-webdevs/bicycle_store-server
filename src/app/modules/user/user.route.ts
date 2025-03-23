@@ -8,7 +8,6 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
-  getUserByEmail,
   getUserById,
   updateUser,
 } from "./user.controller"
