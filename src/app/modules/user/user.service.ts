@@ -24,6 +24,16 @@ const getAllUsersFromDB = async () => {
   return data
 }
 
+const getUserById = async (id: string) => {
+  const data = await User.findById(id)
+  return data
+}
+
+// const getUserByEmail = async (email: string) => {
+//   const data = await User.findOne({ email })
+//   return data
+// }
+
 const updateUserFromDB = async (id: string, payload: Partial<TUser>) => {
   const data = await User.findByIdAndUpdate(id, payload, { new: true })
   return data
@@ -38,22 +48,10 @@ const deleteUserFromDB = async (id: string) => {
   return data
 }
 
-const getUserProfileFromDB = async (id: string, role: string) => {
-  let data
-  if (role === "admin") {
-    data = await User.findById(id)
-  }
-  if (role === "customer") {
-    data = await User.findById(id)
-  }
-
-  return data
-}
-
 export const UserService = {
   createUserToDB,
   getAllUsersFromDB,
+  getUserById,
   updateUserFromDB,
   deleteUserFromDB,
-  getUserProfileFromDB,
 }
