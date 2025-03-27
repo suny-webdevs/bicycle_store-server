@@ -25,14 +25,15 @@ const createBicycleToDB = async (file: any, payload: TBicycle) => {
 }
 
 const getAllBicyclesFromDB = async (query: Record<string, unknown>) => {
+  console.log({ query })
   const bicycleQuery = new QueryBuilder(Bicycle.find(), query)
-    .search(["name", "brand", "category", "inStock"])
+    .search(["name", "brand", "category"])
     .filter()
     .sort()
-    .paginate()
+    .pagination()
     .fields()
 
-  const data = await bicycleQuery.modelQuery
+  const data = await bicycleQuery.queryModel
   const meta = await bicycleQuery.countTotal()
 
   return {
