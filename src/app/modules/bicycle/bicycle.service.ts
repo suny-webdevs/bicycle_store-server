@@ -25,7 +25,6 @@ const createBicycleToDB = async (file: any, payload: TBicycle) => {
 }
 
 const getAllBicyclesFromDB = async (query: Record<string, unknown>) => {
-  console.log({ query })
   const bicycleQuery = new QueryBuilder(Bicycle.find(), query)
     .search(["name", "brand", "category"])
     .filter()
