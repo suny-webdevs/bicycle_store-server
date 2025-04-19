@@ -11,7 +11,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.5.1",
@@ -38,5 +37,14 @@
     "@types/node": "^22.13.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suny-webdevs/bicycle_store-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/suny-webdevs/bicycle_store-server/issues"
+  },
+  "homepage": "https://github.com/suny-webdevs/bicycle_store-server#readme",
+  "description": ""
 }
